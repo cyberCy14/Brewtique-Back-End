@@ -2,19 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ShopHomepage;
-use Illuminate\Http\Request;
+use App\Models\ShopHomepageModel;
+use Illuminate\Http\JsonResponse;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function coffeesInHomepages($id): JsonResponse
     {
-        $coffees = ShopHomepage::all();
+        try {
+            $homepage = ShopHomepageModel::findOrFail($id);
+            $coffees = $homepage->coffees;
 
-        // foreach ($coffees as $shopcoffee){
-        //     $shopcoffee->img = storage::url($shopcoffee->img);
-        // }
+            if ($coffees->isEmpty()) {
+                return response()->json(['error' => 'No coffees found for this homepage'], 404);
+            }
 
-        return response()->json($coffees);
+            $coffeeData = $coffees->map(function ($coffee) {
+
+                return [
+                    'id' => $coffee->id,
+                    'title' => $coffee->title,
+                    'img' => $coffee->img,
+                    'description' => $coffee->description,
+                    'description2' => $coffee->description2,
+                    'price' => $coffee->price,
+                    'rating' => $coffee->rating,
+                    'reviews' => $coffee->reviews,
+                    'link' => url($coffee->link), 
+                ];
+            })->toArray();
+
+            return response()->json($coffeeData);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while fetching coffees'], 500);
+        }
     }
 }

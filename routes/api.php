@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;   
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CoffeeController;
 
 
 Route::get('/user', function (Request $request) {
@@ -16,6 +16,8 @@ Route::prefix("/auth")->group(function () {
     Route::post("/login", [AuthController::class, "login"]); 
 });
 
-// Coffee items in Shop Homepage
-Route::get('/shopCoffees', [ShopController::class, 'coffeesInHomepages']);
 
+Route::get('/coffeeOptionsApi/{category}', [CoffeeController::class, 'coffeeOptions']);
+
+
+Route::get('/coffees', [CoffeeController::class, 'getAllCoffee']);

@@ -57,7 +57,17 @@ return [
             'throw' => false,
         ],
 
+        // 'disks' => [
+        //     'public' => [
+        //         'driver' => 'local',
+        //         'root' => public_path('storage'),
+        //         'url' => env('STORAGE_URL', '/storage'),
+        //         'visibility' => 'public',
+        //     ],
+        // ],
+
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

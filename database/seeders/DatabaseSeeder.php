@@ -23,9 +23,6 @@ class DatabaseSeeder extends Seeder
     
         
         $this->call(CoffeeSeeder2::class);
-        $this->call([
-            CoffeeSeeder2::class,
-        ]);
     }
 }
 

@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;   
@@ -17,7 +18,10 @@ Route::prefix("/auth")->group(function () {
 });
 
 
-Route::get('/coffeeOptionsApi/{category}', [CoffeeController::class, 'coffeeOptions']);
+
+Route::get('/coffees', [CoffeeController::class, 'getAllCoffees']);
+Route::get('/coffees/{category}', [CoffeeController::class, 'coffeeCategory']);
+
+Route::post('/coffees', [CoffeeController::class, 'createCoffee']);
 
 
-Route::get('/coffees', [CoffeeController::class, 'getAllCoffee']);
